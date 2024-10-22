@@ -1,0 +1,180 @@
+
+@font-face {
+    font-family: 'PPEiko-ExtraLight';
+    src: url('assets/polices/PPEiko-ExtraLight.woff2') format('woff2'), /* Preferred modern format */
+         url('assets/polices/PPEiko-ExtraLight.woff') format('woff'),   /* Fallback for slightly older browsers */
+         url('assets/polices/PPEiko-ExtraLight.ttf') format('truetype'), /* Fallback for older browsers */
+         url('assets/polices/PPEiko-ExtraLight.eot'); /* Optional — only needed for IE8 and below */
+    font-style: normal;
+}
+@font-face {
+    font-family: 'PPEiko-Light';
+    src: url('assets/polices/PPEiko-Light.woff2') format('woff2'), /* Preferred modern format */
+         url('assets/polices/PPEiko-Light.woff') format('woff'),   /* Fallback for slightly older browsers */
+         url('assets/polices/PPEiko-Light.ttf') format('truetype'), /* Fallback for older browsers */
+         url('assets/polices/PPEiko-Light.eot'); /* Optional — only needed for IE8 and below */
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Favorit-Regular';
+    src: url('assets/polices/Favorit-Regular.woff2') format('woff2'),
+         url('assets/polices/Favorit-Regular.woff') format('woff'),
+         url('assets/polices/Favorit-Regular.ttf') format('truetype'),
+         url('assets/polices/Favorit-Regular.eot');
+    font-style: normal;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* body takes up full height */
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: #fffaf9; /* slightly off-white BG */
+    color: #ff2f03; /* all type = red */
+}
+
+header {
+    height: 28px;
+    display: flex;
+    align-items: center; /* vertical centering of elements */
+    margin: 16.5px 15.5px 11.5px 15.5px; /* 15.5px margin around header */
+}
+
+#left, #right, .position {
+    font-family: 'PPEiko-ExtraLight', Times, serif;
+    font-size: 9.5pt;
+}
+
+#left {
+    flex: 1;
+    text-align: left;
+    padding-left: 3px; /* optical space added to left */
+    cursor: default;
+}
+
+#center {
+    flex: 1;
+    text-align: center;
+    cursor: pointer; /* indicate element is clickable */
+    color: #ff2f03; /* red */
+    font-family: 'Favorit-Regular', Helvetica, sans-serif;
+    font-size: 12pt;
+    letter-spacing: 0.07em;
+    user-select: none; /* disable from being selectable */
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#right {
+    flex: 1;
+    text-align: right;
+    padding-right: 3px;
+    word-break: break-word; /* make sure the line breaks appropriately upon resize */
+}
+
+#right a {
+    color: #ff2f03; /* red */
+    text-decoration: none;
+    margin-left: 5px; /* small left margin for spacing between elements */
+}
+
+#right span {
+    cursor: default;
+}
+
+#right a:hover {
+    cursor: pointer; /* indicate element is clickable */
+}
+
+#container {
+    display: flex; /* flexbox to arrange carousel and team */
+    height: calc(100vh - 28px - 31px - 12.5px); /* full viewport height minus header, top/bottom margins, and bottom margin adjusted optically from 15.5 to 12.5px */
+    margin-bottom: 15.5px; /* always visible bottom margin */
+}
+
+#carousel {
+    display: flex;
+    justify-content: center; /* center elements vertically */
+    align-items: center;
+    overflow: hidden; /* NO overflow in carousel */
+    flex: 1 1 100%; /* take up full width of container */
+    margin: 0 15.5px; /* always visible margin of 15.5px to left and right */
+}
+
+#carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* image always covers the full div */
+    position: relative;
+    user-drag: none;  /* disable images from being draggable/selectable */
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#team {
+    display: none; /* hidden until logo clicked */
+    flex: 1; /* takes up half the width of container */
+    overflow-y: auto; /* allow scrolling if content overflows */
+    display: flex; /* flexbox for centering */
+    flex-direction: column; /* stack team members vertically */
+    justify-content: center; /* center team members vertically */
+    align-items: left; /* align team members to the left horizontally */
+    line-height: 1.25; /* tightening default line height of 1.4pt */
+}
+
+.member {
+    margin-bottom: 15px; /* spacing between each team members */
+    margin-left: 10px; /* left margin for member list */
+}
+
+.name {
+    font-family: 'PPEiko-Light', sans-serif;
+    font-size: 15pt;
+}
+
+#carousel video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ensure video covers entire carousel */
+}
+
+
+/* MOBILE BREAKPOINT: styles for small devices */
+
+@media (max-width: 576px) {
+
+    header {
+      margin: 16px 15px 11px 15px; /* new 15px margin around header */
+    }
+
+    #carousel {
+        display: flex; /* by default, carousel visible but will be hidden when the screen is small and team is shown */
+    }
+
+    #container {
+        margin-bottom: 15px;
+        flex-direction: column;
+    }
+
+    #team {
+        flex: 0 0 100%; /* team takes up full width on mobile */
+        display: none; /* team hidden until triggered */
+        align-items: center; /* center text block horizontally */
+        line-height: 1.3;
+    }
+
+    .name, .position {
+        text-align: center; /* center all team text on mobile */
+    }
+
+    #left, #right, .position {
+        font-size: 7.5pt; /* adjust size for mobile */
+    }
+
+}
