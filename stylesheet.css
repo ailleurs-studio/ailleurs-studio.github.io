@@ -54,10 +54,6 @@ header {
     text-decoration: none;
 }
 
-span {
-    text-decoration: none;
-}
-
 #center {
     flex: 1;
     text-align: center;
@@ -84,13 +80,8 @@ span {
 #right a {
     color: #ff2f03; /* red */
     text-decoration: none;
-    margin-left: 5px; /* small left margin for spacing between elements */
 }
 
-#right span {
-    cursor: default;
-    text-decoration: none;
-}
 
 #right a:hover {
     cursor: pointer; /* indicate element is clickable */
@@ -181,7 +172,7 @@ span {
         align-items: center; /* center text block horizontally */
         line-height: 1.3;
         overflow-y: auto; /* allow scrolling if content overflows */
-        margin: auto;
+        margin-left: 0px; /* left margin for member list */
     }
 
     .member {
