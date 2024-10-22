@@ -77,6 +77,7 @@ span {
     flex: 1;
     text-align: right;
     padding-right: 3px;
+    text-decoration: none;
     word-break: break-word; /* make sure the line breaks appropriately upon resize */
 }
 
@@ -88,6 +89,7 @@ span {
 
 #right span {
     cursor: default;
+    text-decoration: none;
 }
 
 #right a:hover {
@@ -158,6 +160,10 @@ span {
 
     header {
       margin: 16px 15px 11px 15px; /* new 15px margin around header */
+    }
+
+    html, body {
+        overflow-y: auto;
     }
 
     #carousel {
