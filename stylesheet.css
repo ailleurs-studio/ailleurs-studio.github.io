@@ -184,3 +184,59 @@ header {
     }
 
 }
+
+/* MOBILE BREAKPOINT: styles for small devices */
+
+@media (max-width: 576px) {
+
+    header {
+      margin: 16px 15px 11px 15px; /* new 15px margin around header */
+    }
+
+    html, body {
+        overflow-y: auto;
+    }
+
+    #carousel {
+        display: flex; /* by default, carousel visible but will be hidden when the screen is small and team is shown */
+    }
+
+    #container {
+        margin-bottom: calc(15px + env(safe-area-inset-bottom)); /* dynamically adjusting the space based on the size of the browser's bottom UI */
+        flex-direction: column;
+    }
+
+    #team {
+        flex: 0 0 100%; /* team takes up full width on mobile */
+        display: none; /* team hidden until triggered */
+        align-items: center; /* center text block horizontally */
+        line-height: 1.3;
+        overflow-y: auto; /* allow scrolling if content overflows */
+    }
+
+    .member {
+        margin-bottom: 13px; /* spacing between each team members */
+        margin-left: 0px; /* left margin for member list */
+    }
+
+    .name, .position {
+        text-align: center; /* center all team text on mobile */
+    }
+
+}
+
+@media (min-width: 1400px) {
+
+    #left, #right, .position {
+        font-size: 11pt; /* scaling for large sites */
+    }
+
+    #center {
+        font-size: 13.5pt; /* scaling for large sites */
+    }
+
+    .name {
+        font-size: 17.5pt; /* scaling for large sites */
+    }
+
+}
