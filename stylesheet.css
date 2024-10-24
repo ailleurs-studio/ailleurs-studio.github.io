@@ -119,7 +119,7 @@ header {
 #team {
     display: none; /* hidden until logo clicked */
     flex: 1; /* takes up half the width of container */
-    
+
     margin: auto;
     display: flex; /* flexbox for centering */
     flex-direction: column; /* stack team members vertically */
@@ -236,8 +236,8 @@ header {
 
 /* BREAKPOINT: standard big desktop sizes */
 
-@media (min-width: 1400px) and (max-width: 1920px) {
-
+@media (min-width: 1450px) and (max-width: 1920px) {
+  
       #left, #right, .position {
           font-size: 8pt;
       }
@@ -248,13 +248,13 @@ header {
           font-size: clamp(16pt, 1.6vw, 22pt);
       }
       .member {
-          margin-bottom: clamp(14pt, 1.6vw, 15pt); /* spacing between each team members */
+          margin-bottom: clamp(14pt, 1.2vw, 15pt); /* spacing between each team members */
       }
 }
 
 /* BREAKPOINT: standard medium desktop sizes */
 
-@media (min-width: 1200px) and (max-width: 1400px) {
+@media (min-width: 1200px) and (max-width: 1450px) {
 
       #left, #right, .position {
           font-size: 8pt;
