@@ -119,7 +119,7 @@ header {
 #team {
     display: none; /* hidden until logo clicked */
     flex: 1; /* takes up half the width of container */
-    overflow-y: auto; /* allow scrolling if content overflows */
+    
     margin: auto;
     display: flex; /* flexbox for centering */
     flex-direction: column; /* stack team members vertically */
