@@ -1,4 +1,5 @@
 // array of static images displayed inside carousel
+// (just add an additional line to add any image to image carousel and script will accomodate):
 const images = [
     "assets/images/IMG_3084_2.webp",
     "assets/images/IMG_3084_3.webp",
@@ -12,7 +13,8 @@ const videoUrl = "assets/images/video.mp4"; // storing URL of video file
 let videoElement = null; // variable for video element added to DOM, null until video is added
 let isTeamVisible = false; // flag if team section is visible or not
 
-// team members array data (name + position):
+// team members array data (name + position)
+// (just add an additional line to add a member to team and script will accomodate):
 const teamMembers = [
     { name: "Alessandro Brotto", position: "Founder & director" },
     { name: "Alessandro Martin", position: "Junior visualiser" },
@@ -23,7 +25,8 @@ const teamMembers = [
     { name: "Isabelle Boulein", position: "Administration" },
     { name: "Matthieu Sagot", position: "Project manager & senior visualiser" },
     { name: "Nicolò Ciccotti", position: "Senior visualiser" },
-    { name: "Yulia Dorofieieva", position: "Project manager & senior visualiser" }
+    { name: "Yulia Dorofieieva", position: "Project manager & senior visualiser" },
+    { name: " ", position: "© ailleurs.studio 2024" } // last space used for copyright — do not remove and add person above if modifying team list!
 ];
 
 // function to dynamically create members (name + position) and populate team section
