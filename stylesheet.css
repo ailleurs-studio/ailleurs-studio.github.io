@@ -54,6 +54,7 @@ header {
     padding-left: 3px; /* optical space added to left */
     cursor: default;
     text-decoration: none;
+    letter-spacing: 0.01em; /* slightly larger to balance out sides */
 }
 
 #center {
@@ -76,6 +77,10 @@ header {
     padding-right: 3px;
     text-decoration: none;
     word-break: break-word; /* make sure the line breaks appropriately upon resize */
+}
+
+#right #tel {
+    letter-spacing: -0.015em; /* slightly tighter to balance out sides */
 }
 
 #left a, #right a {
@@ -157,10 +162,10 @@ header {
       font-size: 27pt;
   }
   .name {
-      font-size:48pt;
+      font-size: clamp(40pt, 1.4vw, 45pt);
   }
   .member {
-      margin-bottom: 30pt; /* spacing between each team members */
+      margin-bottom: 26pt; /* spacing between each team members */
   }
   header {
       height: 64px;
@@ -187,7 +192,7 @@ header {
         font-size: 20pt;
     }
     .name {
-        font-size: clamp(35pt, 1.4vw, 45pt);
+        font-size: clamp(35pt, 1.4vw, 40pt);
     }
     .member {
         margin-bottom: clamp(20pt, 1.6vw, 24pt); /* spacing between each team members */
