@@ -5,6 +5,7 @@
 
 // array of static images displayed inside carousel
 const images = [
+    "assets/images/IMG_3084_1.webp", // First image loaded dynamically
     "assets/images/IMG_3084_2.webp",
     "assets/images/IMG_3084_3.webp",
     "assets/images/IMG_3084_4.webp"
@@ -22,6 +23,7 @@ const teamMembers = [
     { name: "Matthieu Sagot", position: "Project manager & senior visualiser" },
     { name: "Nicolò Ciccotti", position: "Senior visualiser" },
     { name: "Yulia Dorofieieva", position: "Project manager & senior visualiser" },
+    { name: "Paolo Cirelli", position: "Senior visualiser" },
     { name: " ", position: "© ailleurs.studio 2024" } // last space used for copyright — do not remove and add person above if modifying team list!
 ];
 
@@ -30,6 +32,7 @@ const teamMembers = [
 
 let currentIndex = 0; // keeping track of current image displayed in carousel
 const imgElement = document.getElementById('carousel-image'); // grab img element from DOM
+imgElement.src = images[0]; // setting initial image source to the first image in the array
 let carouselInterval; // variable to switch img every 7 seconds
 const videoUrl = "assets/images/video.mp4"; // storing URL of video file
 let videoElement = null; // variable for video element added to DOM, null until video is added
