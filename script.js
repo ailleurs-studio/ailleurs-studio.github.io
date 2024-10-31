@@ -22,8 +22,8 @@ const teamMembers = [
     { name: "Isabelle Boulein", position: "Administration" },
     { name: "Matthieu Sagot", position: "Project manager & senior visualiser" },
     { name: "Nicolò Ciccotti", position: "Senior visualiser" },
-    { name: "Yulia Dorofieieva", position: "Project manager & senior visualiser" },
     { name: "Paolo Cirelli", position: "Senior visualiser" },
+    { name: "Yulia Dorofieieva", position: "Project manager & senior visualiser" },
     { name: " ", position: "© ailleurs.studio 2024" } // last space used for copyright — do not remove and add person above if modifying team list!
 ];
 
