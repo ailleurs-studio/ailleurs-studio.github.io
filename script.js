@@ -86,7 +86,7 @@ function playVideo() {
         videoElement.autoplay = true;
         videoElement.loop = true;
         videoElement.muted = true; // Ensure video is muted
-        videoElement.playsInline = true; 
+        videoElement.playsInline = true;
         videoElement.preload = 'auto'; // Preload the video for immediate play
         videoElement.style.width = '100%';
         videoElement.style.height = '100%';
