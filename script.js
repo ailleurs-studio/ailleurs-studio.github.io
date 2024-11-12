@@ -181,10 +181,10 @@ window.addEventListener('resize', () => {
 function updateOverflow() {
     if (window.innerHeight < window.innerWidth) {
         // Landscape mode
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = 'hidden';
     } else {
         // Portrait mode
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'auto';
     }
 }
 
