@@ -86,13 +86,15 @@ function playVideo() {
         videoElement.autoplay = true;
         videoElement.loop = true;
         videoElement.muted = true;
-        videoElement.playsInline = true;  // Add this line
+        videoElement.playsInline = true;
         videoElement.style.width = '100%';
         videoElement.style.height = '100%';
         videoElement.style.objectFit = 'cover';
         carouselDiv.appendChild(videoElement);
     }
 
+    // Ensure the carousel height is set to cover the full viewport when showing the video
+    carouselDiv.style.height = '100vh'; // Make carousel take full height of the viewport
     imgElement.style.display = 'none';
     videoElement.style.display = 'block';
     videoElement.currentTime = 0;
@@ -157,7 +159,7 @@ document.getElementById('center').addEventListener('click', () => {
         carouselDiv.style.display = 'flex'; // carousel visible again
         carouselDiv.style.flex = '1 1 100%'; // carousel full width flex
         teamDiv.style.display = 'none'; // hiding team section
-        carouselDiv.style.height = '100vh'; // reset carousel to full viewport height
+        carouselDiv.style.height = '100vh'; // reset carousel to full viewport height for video coverage
         showCarousel(); // showing carousel with images
         isTeamVisible = false; // flagging that team is hidden
     }
