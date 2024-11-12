@@ -1,6 +1,6 @@
 // ASSETS EDITS
 
-// Just add/remove line to modify elements and script will accomodate
+// Just add/remove line to modify elements and script will accommodate
 // Make sure to add commas between each element (but last element no comma)
 
 // array of static images displayed inside carousel
@@ -86,19 +86,23 @@ function playVideo() {
         videoElement.autoplay = true;
         videoElement.loop = true;
         videoElement.muted = true;
-        videoElement.playsInline = true;  // Add this line
+        videoElement.playsInline = true;
         videoElement.style.width = '100%';
         videoElement.style.height = '100%';
         videoElement.style.objectFit = 'cover';
+        videoElement.style.position = 'absolute'; // Position the video absolutely
+        videoElement.style.top = '0';
+        videoElement.style.left = '0';
         carouselDiv.appendChild(videoElement);
     }
 
+    // Ensure the carousel div occupies the full viewport height when showing the video
+    carouselDiv.style.height = '100vh';
     imgElement.style.display = 'none';
     videoElement.style.display = 'block';
     videoElement.currentTime = 0;
     videoElement.play();
 }
-
 
 // function to show image carousel
 function showCarousel() {
@@ -110,6 +114,22 @@ function showCarousel() {
     startCarousel(); // starting carousel again
 }
 
+// function to adjust carousel height to match team section height only in mobile landscape
+function adjustCarouselHeight() {
+    const carouselDiv = document.getElementById('carousel');
+    const teamDiv = document.getElementById('team');
+    const isMobileLandscape = window.innerWidth < 576 && window.innerWidth > window.innerHeight;
+
+    if (isTeamVisible && isMobileLandscape) {
+        // Match team's height only in mobile landscape mode
+        const teamHeight = teamDiv.offsetHeight;
+        carouselDiv.style.height = `${teamHeight}px`;
+    } else {
+        // Default to full viewport height in other cases
+        carouselDiv.style.height = '100vh';
+    }
+}
+
 // at each page load, carousel will restart
 document.addEventListener('DOMContentLoaded', () => {
     startCarousel(); // starting carousel on page load
@@ -117,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // event listener to toggle team's visibility and video
 document.getElementById('center').addEventListener('click', () => {
-
     const carouselDiv = document.getElementById('carousel');
     const teamDiv = document.getElementById('team');
     const screenWidth = window.innerWidth; // get current screen width
@@ -125,10 +144,10 @@ document.getElementById('center').addEventListener('click', () => {
     if (teamDiv.style.display === 'none' || teamDiv.style.display === '') {
         // when showing team section:
         carouselDiv.style.flex = '1 1 50%'; // carousel takes 50% width
-        teamDiv.style.display = 'flex'; // carousel is shown
+        teamDiv.style.display = 'flex'; // show team section
         teamDiv.style.flex = '1 1 50%'; // team takes 50% width
 
-        // if current screen width is mobile-sized:
+        // if current screen width is desktop-sized:
         if (screenWidth > 576) {
             playVideo(); // show and play the video every time team is shown
             stopCarousel(); // stop image carousel when the video shows
@@ -138,6 +157,7 @@ document.getElementById('center').addEventListener('click', () => {
         }
 
         populateTeam();  // populate the team members in the team section
+        adjustCarouselHeight(); // adjust carousel height to match team section if mobile landscape
         isTeamVisible = true; // flag if team is visible
 
     } else {
@@ -145,6 +165,7 @@ document.getElementById('center').addEventListener('click', () => {
         carouselDiv.style.display = 'flex'; // carousel visible again
         carouselDiv.style.flex = '1 1 100%'; // carousel full width flex
         teamDiv.style.display = 'none'; // hiding team section
+        carouselDiv.style.height = '100vh'; // reset carousel to full viewport height
         showCarousel(); // showing carousel with images
         isTeamVisible = false; // flagging that team is hidden
     }
@@ -152,25 +173,25 @@ document.getElementById('center').addEventListener('click', () => {
 
 // event listener for window resize to handle showing/hiding the carousel + video
 window.addEventListener('resize', () => {
-    const carouselDiv = document.getElementById('carousel');
-    const teamDiv = document.getElementById('team');
-    const screenWidth = window.innerWidth;
-
-// when resizing back to desktop, go back to initial state:
-    if (screenWidth > 576) {
-        carouselDiv.style.display = 'flex';
-        if (isTeamVisible) {
-            carouselDiv.style.flex = '1 1 50%'; // carousel back to 50% width
-            teamDiv.style.flex = '1 1 50%'; // team back to 50% width
-            playVideo(); // video plays again on desktop
-        } else {
-            // if team is not visible, make carousel full width
-            carouselDiv.style.flex = '1 1 100%'; // carousel full width
-        }
-    } else {
-        // while team visible on mobile, always keep the carousel hidden
-        if (isTeamVisible) {
-            carouselDiv.style.display = 'none'; // hide carousel on small screens!
-        }
+    if (isTeamVisible) {
+        adjustCarouselHeight(); // adjust height if the team is visible
     }
 });
+
+// function to adjust container margin based on orientation
+function adjustContainerMargin() {
+    const containerDiv = document.getElementById('container');
+    if (window.innerWidth > window.innerHeight) {
+        // tipping phone into landscape mode
+        containerDiv.style.marginBottom = '15.5px'; // add an extra bottom margin
+    } else {
+        // portrait mode
+        containerDiv.style.marginBottom = '0'; // no extra bottom margin
+    }
+}
+
+// Call the function on window resize to adjust container margin based on orientation
+window.addEventListener('resize', adjustContainerMargin);
+
+// Initial call to set the margin based on the current orientation
+adjustContainerMargin();
