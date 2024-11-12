@@ -90,11 +90,16 @@ function playVideo() {
         videoElement.style.width = '100%';
         videoElement.style.height = '100%';
         videoElement.style.objectFit = 'cover';
+        videoElement.style.position = 'absolute'; // Position the video absolutely
+        videoElement.style.top = '0';
+        videoElement.style.left = '0';
         carouselDiv.appendChild(videoElement);
     }
 
-    // Ensure the carousel height is set to cover the full viewport when showing the video
-    carouselDiv.style.height = '100vh'; // Make carousel take full height of the viewport
+    // Enforce the carousel div to occupy full viewport height and width when showing video
+    carouselDiv.style.height = '100vh';
+    carouselDiv.style.width = '100vw';
+    carouselDiv.style.position = 'relative'; // Position carousel relative to contain video
     imgElement.style.display = 'none';
     videoElement.style.display = 'block';
     videoElement.currentTime = 0;
