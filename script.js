@@ -80,13 +80,14 @@ function stopCarousel() {
 // function to create or play the video (only shown on desktop, hidden on mobile)
 function playVideo() {
     const carouselDiv = document.getElementById('carousel');
-    if (!videoElement) { // creating video element only once and if videoElement is null
+    if (!videoElement) {
         videoElement = document.createElement('video');
         videoElement.src = videoUrl;
         videoElement.autoplay = true;
         videoElement.loop = true;
-        videoElement.muted = true;
-        videoElement.playsInline = true;  // Add this line
+        videoElement.muted = true; // Ensure video is muted
+        videoElement.playsInline = true; 
+        videoElement.preload = 'auto'; // Preload the video for immediate play
         videoElement.style.width = '100%';
         videoElement.style.height = '100%';
         videoElement.style.objectFit = 'cover';
@@ -96,8 +97,11 @@ function playVideo() {
     imgElement.style.display = 'none';
     videoElement.style.display = 'block';
     videoElement.currentTime = 0;
-    videoElement.play();
+    videoElement.play().catch(error => {
+        console.error("Autoplay failed:", error);
+    });
 }
+
 
 // function to show image carousel
 function showCarousel() {
