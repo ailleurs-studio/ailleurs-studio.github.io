@@ -1,6 +1,6 @@
 // ASSETS EDITS
 
-// Just add/remove line to modify elements and script will accommodate
+// Just add/remove line to modify elements and script will accomodate
 // Make sure to add commas between each element (but last element no comma)
 
 // array of static images displayed inside carousel
@@ -86,25 +86,19 @@ function playVideo() {
         videoElement.autoplay = true;
         videoElement.loop = true;
         videoElement.muted = true;
-        videoElement.playsInline = true;
+        videoElement.playsInline = true;  // Add this line
         videoElement.style.width = '100%';
         videoElement.style.height = '100%';
         videoElement.style.objectFit = 'cover';
-        videoElement.style.position = 'absolute'; // Position the video absolutely
-        videoElement.style.top = '0';
-        videoElement.style.left = '0';
         carouselDiv.appendChild(videoElement);
     }
 
-    // Enforce the carousel div to occupy full viewport height and width when showing video
-    carouselDiv.style.height = '100vh';
-    carouselDiv.style.width = '100vw';
-    carouselDiv.style.position = 'relative'; // Position carousel relative to contain video
     imgElement.style.display = 'none';
     videoElement.style.display = 'block';
     videoElement.currentTime = 0;
     videoElement.play();
 }
+
 
 // function to show image carousel
 function showCarousel() {
@@ -116,19 +110,6 @@ function showCarousel() {
     startCarousel(); // starting carousel again
 }
 
-// function to adjust carousel height to match team section height
-function adjustCarouselHeight() {
-    const carouselDiv = document.getElementById('carousel');
-    const teamDiv = document.getElementById('team');
-
-    if (teamDiv.style.display !== 'none') { // only adjust if team is visible
-        const teamHeight = teamDiv.offsetHeight;
-        carouselDiv.style.height = `${teamHeight}px`; // setting the carousel to match team height
-    } else {
-        carouselDiv.style.height = '100vh'; // default to full viewport height when team is hidden
-    }
-}
-
 // at each page load, carousel will restart
 document.addEventListener('DOMContentLoaded', () => {
     startCarousel(); // starting carousel on page load
@@ -136,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // event listener to toggle team's visibility and video
 document.getElementById('center').addEventListener('click', () => {
+
     const carouselDiv = document.getElementById('carousel');
     const teamDiv = document.getElementById('team');
     const screenWidth = window.innerWidth; // get current screen width
@@ -143,10 +125,10 @@ document.getElementById('center').addEventListener('click', () => {
     if (teamDiv.style.display === 'none' || teamDiv.style.display === '') {
         // when showing team section:
         carouselDiv.style.flex = '1 1 50%'; // carousel takes 50% width
-        teamDiv.style.display = 'flex'; // show team section
+        teamDiv.style.display = 'flex'; // carousel is shown
         teamDiv.style.flex = '1 1 50%'; // team takes 50% width
 
-        // if current screen width is desktop-sized:
+        // if current screen width is mobile-sized:
         if (screenWidth > 576) {
             playVideo(); // show and play the video every time team is shown
             stopCarousel(); // stop image carousel when the video shows
@@ -156,7 +138,6 @@ document.getElementById('center').addEventListener('click', () => {
         }
 
         populateTeam();  // populate the team members in the team section
-        adjustCarouselHeight(); // adjust carousel height to match team section
         isTeamVisible = true; // flag if team is visible
 
     } else {
@@ -164,7 +145,6 @@ document.getElementById('center').addEventListener('click', () => {
         carouselDiv.style.display = 'flex'; // carousel visible again
         carouselDiv.style.flex = '1 1 100%'; // carousel full width flex
         teamDiv.style.display = 'none'; // hiding team section
-        carouselDiv.style.height = '100vh'; // reset carousel to full viewport height for video coverage
         showCarousel(); // showing carousel with images
         isTeamVisible = false; // flagging that team is hidden
     }
@@ -176,41 +156,21 @@ window.addEventListener('resize', () => {
     const teamDiv = document.getElementById('team');
     const screenWidth = window.innerWidth;
 
-    // adjusting carousel and team section for screen size changes
+// when resizing back to desktop, go back to initial state:
     if (screenWidth > 576) {
         carouselDiv.style.display = 'flex';
         if (isTeamVisible) {
-            carouselDiv.style.flex = '1 1 50%'; // carousel = 50% width
-            teamDiv.style.flex = '1 1 50%'; // team = 50% width
-            playVideo(); // play video on larger screens
+            carouselDiv.style.flex = '1 1 50%'; // carousel back to 50% width
+            teamDiv.style.flex = '1 1 50%'; // team back to 50% width
+            playVideo(); // video plays again on desktop
         } else {
-            carouselDiv.style.flex = '1 1 100%'; // full width for carousel when team = hidden
+            // if team is not visible, make carousel full width
+            carouselDiv.style.flex = '1 1 100%'; // carousel full width
         }
-    } else if (isTeamVisible) {
-        // hiding carousel on small screens when team is visible
-        carouselDiv.style.display = 'none';
-    }
-
-    // adjusting height if the team is visible
-    if (isTeamVisible) {
-        adjustCarouselHeight();
+    } else {
+        // while team visible on mobile, always keep the carousel hidden
+        if (isTeamVisible) {
+            carouselDiv.style.display = 'none'; // hide carousel on small screens!
+        }
     }
 });
-
-// function to adjust container margin based on orientation
-function adjustContainerMargin() {
-    const containerDiv = document.getElementById('container');
-    if (window.innerWidth > window.innerHeight) {
-        // tipping phone into landscape mode
-        containerDiv.style.marginBottom = '15.5px'; // add an extra bottom margin
-    } else {
-        // portrait mode
-        containerDiv.style.marginBottom = '0'; // no extra bottom margin
-    }
-}
-
-// Call the function on window resize to adjust container margin based on orientation
-window.addEventListener('resize', adjustContainerMargin);
-
-// Initial call to set the margin based on the current orientation
-adjustContainerMargin();
