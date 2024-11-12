@@ -80,26 +80,25 @@ function stopCarousel() {
 // function to create or play the video (only shown on desktop, hidden on mobile)
 function playVideo() {
     const carouselDiv = document.getElementById('carousel');
-
     if (!videoElement) {
-        // creating video element only once and if videoElement is null
         videoElement = document.createElement('video');
         videoElement.src = videoUrl;
         videoElement.autoplay = true;
         videoElement.loop = true;
         videoElement.muted = true;
+        videoElement.playsInline = true;  // Add this line
         videoElement.style.width = '100%';
         videoElement.style.height = '100%';
-        videoElement.style.objectFit = 'cover'; // video covers whole carousel div
-        carouselDiv.appendChild(videoElement); // adding video to carousel div
+        videoElement.style.objectFit = 'cover';
+        carouselDiv.appendChild(videoElement);
     }
 
-    // ensuring the video is shown and played each time
-    imgElement.style.display = 'none'; // hiding images to replace with video
+    imgElement.style.display = 'none';
     videoElement.style.display = 'block';
-    videoElement.currentTime = 0; // reset video: start playing from the beginning
-    videoElement.play(); // ensuring video is played each time
+    videoElement.currentTime = 0;
+    videoElement.play();
 }
+
 
 // function to show image carousel
 function showCarousel() {

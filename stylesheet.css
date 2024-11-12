@@ -310,6 +310,13 @@ header {
     }
 }
 
+/* PHONES – LAMDSCAPE */
+@media screen and (orientation: landscape) {
+    html, body {
+        overflow-y: auto !important ;
+    }
+}
+
 /* BREAKPOINT: small tablets and mobile phones (under 576px) */
 
 @media (max-width: 576px) {
