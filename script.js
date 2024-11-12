@@ -110,6 +110,19 @@ function showCarousel() {
     startCarousel(); // starting carousel again
 }
 
+// function to adjust carousel height to match team section height
+function adjustCarouselHeight() {
+    const carouselDiv = document.getElementById('carousel');
+    const teamDiv = document.getElementById('team');
+
+    if (teamDiv.style.display !== 'none') { // only adjust if team is visible
+        const teamHeight = teamDiv.offsetHeight;
+        carouselDiv.style.height = `${teamHeight}px`; // setting the carousel to match team height
+    } else {
+        carouselDiv.style.height = '100vh'; // default to full viewport height when team is hidden
+    }
+}
+
 // at each page load, carousel will restart
 document.addEventListener('DOMContentLoaded', () => {
     startCarousel(); // starting carousel on page load
@@ -117,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // event listener to toggle team's visibility and video
 document.getElementById('center').addEventListener('click', () => {
-
     const carouselDiv = document.getElementById('carousel');
     const teamDiv = document.getElementById('team');
     const screenWidth = window.innerWidth; // get current screen width
@@ -125,10 +137,10 @@ document.getElementById('center').addEventListener('click', () => {
     if (teamDiv.style.display === 'none' || teamDiv.style.display === '') {
         // when showing team section:
         carouselDiv.style.flex = '1 1 50%'; // carousel takes 50% width
-        teamDiv.style.display = 'flex'; // carousel is shown
+        teamDiv.style.display = 'flex'; // show team section
         teamDiv.style.flex = '1 1 50%'; // team takes 50% width
 
-        // if current screen width is mobile-sized:
+        // if current screen width is desktop-sized:
         if (screenWidth > 576) {
             playVideo(); // show and play the video every time team is shown
             stopCarousel(); // stop image carousel when the video shows
@@ -138,6 +150,7 @@ document.getElementById('center').addEventListener('click', () => {
         }
 
         populateTeam();  // populate the team members in the team section
+        adjustCarouselHeight(); // adjust carousel height to match team section (landscape)
         isTeamVisible = true; // flag if team is visible
 
     } else {
@@ -145,32 +158,36 @@ document.getElementById('center').addEventListener('click', () => {
         carouselDiv.style.display = 'flex'; // carousel visible again
         carouselDiv.style.flex = '1 1 100%'; // carousel full width flex
         teamDiv.style.display = 'none'; // hiding team section
+        carouselDiv.style.height = '100vh'; // reset carousel to full viewport height
         showCarousel(); // showing carousel with images
         isTeamVisible = false; // flagging that team is hidden
     }
 });
 
 // event listener for window resize to handle showing/hiding the carousel + video
+// adjusting carousel and team section on window resize
 window.addEventListener('resize', () => {
     const carouselDiv = document.getElementById('carousel');
     const teamDiv = document.getElementById('team');
     const screenWidth = window.innerWidth;
 
-// when resizing back to desktop, go back to initial state:
+    // adjusting carousel and team section for screen size changes
     if (screenWidth > 576) {
         carouselDiv.style.display = 'flex';
         if (isTeamVisible) {
-            carouselDiv.style.flex = '1 1 50%'; // carousel back to 50% width
-            teamDiv.style.flex = '1 1 50%'; // team back to 50% width
-            playVideo(); // video plays again on desktop
+            carouselDiv.style.flex = '1 1 50%'; // carousel = 50% width
+            teamDiv.style.flex = '1 1 50%'; // team = 50% width
+            playVideo(); // play video on larger screens
         } else {
-            // if team is not visible, make carousel full width
-            carouselDiv.style.flex = '1 1 100%'; // carousel full width
+            carouselDiv.style.flex = '1 1 100%'; // full width for carousel when team = hidden
         }
-    } else {
-        // while team visible on mobile, always keep the carousel hidden
-        if (isTeamVisible) {
-            carouselDiv.style.display = 'none'; // hide carousel on small screens!
-        }
+    } else if (isTeamVisible) {
+        // hiding carousel on small screens when team is visible
+        carouselDiv.style.display = 'none';
+    }
+
+    // adjusting height if the team is visible
+    if (isTeamVisible) {
+        adjustCarouselHeight();
     }
 });
