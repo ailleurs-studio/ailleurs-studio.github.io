@@ -191,3 +191,20 @@ window.addEventListener('resize', () => {
         adjustCarouselHeight();
     }
 });
+
+function adjustContainerMargin() {
+    const containerDiv = document.getElementById('container');
+    if (window.innerWidth > window.innerHeight) {
+        // tipping phonw into landscape mode
+        containerDiv.style.marginBottom = '15.5px'; // add an extra bottom margin
+    } else {
+        // portrait mode
+        containerDiv.style.marginBottom = '0'; // no extra bottom margin
+    }
+}
+
+// Call the function on window resize
+window.addEventListener('resize', adjustContainerMargin);
+
+// Initial call to set the margin based on the current orientation
+adjustContainerMargin();
