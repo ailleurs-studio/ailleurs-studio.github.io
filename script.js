@@ -102,6 +102,12 @@ function playVideo() {
     });
 }
 
+// debounced resize event for updateOverflow -- avoid interfering with video going from desktop mode to mobile mode by By limiting the updateOverflow() calls during the resize event.
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(updateOverflow, 200);
+});
 
 // function to show image carousel
 function showCarousel() {
@@ -178,6 +184,7 @@ window.addEventListener('resize', () => {
     }
 });
 
+// to enable scrolling on small devices in landscape mode, but not desktops
 function updateOverflow() {
     if (window.innerHeight < window.innerWidth) {
         // Landscape mode
@@ -187,9 +194,7 @@ function updateOverflow() {
         document.body.style.overflow = 'auto';
     }
 }
-
-// Initial check on load
+// initially checking orientation on load
 updateOverflow();
-
-// Listen for orientation change events
+// listening for any orientation change (throttling) events
 window.addEventListener('resize', updateOverflow);
