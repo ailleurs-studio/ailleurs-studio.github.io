@@ -99,7 +99,6 @@ function playVideo() {
     videoElement.play();
 }
 
-
 // function to show image carousel
 function showCarousel() {
     if (videoElement) {
@@ -192,10 +191,11 @@ window.addEventListener('resize', () => {
     }
 });
 
+// function to adjust container margin based on orientation
 function adjustContainerMargin() {
     const containerDiv = document.getElementById('container');
     if (window.innerWidth > window.innerHeight) {
-        // tipping phonw into landscape mode
+        // tipping phone into landscape mode
         containerDiv.style.marginBottom = '15.5px'; // add an extra bottom margin
     } else {
         // portrait mode
@@ -203,7 +203,7 @@ function adjustContainerMargin() {
     }
 }
 
-// Call the function on window resize
+// Call the function on window resize to adjust container margin based on orientation
 window.addEventListener('resize', adjustContainerMargin);
 
 // Initial call to set the margin based on the current orientation
