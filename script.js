@@ -96,8 +96,10 @@ function playVideo() {
         carouselDiv.appendChild(videoElement);
     }
 
-    // Ensure the carousel div occupies the full viewport height when showing the video
+    // Enforce the carousel div to occupy full viewport height and width when showing video
     carouselDiv.style.height = '100vh';
+    carouselDiv.style.width = '100vw';
+    carouselDiv.style.position = 'relative'; // Position carousel relative to contain video
     imgElement.style.display = 'none';
     videoElement.style.display = 'block';
     videoElement.currentTime = 0;
@@ -114,19 +116,16 @@ function showCarousel() {
     startCarousel(); // starting carousel again
 }
 
-// function to adjust carousel height to match team section height only in mobile landscape
+// function to adjust carousel height to match team section height
 function adjustCarouselHeight() {
     const carouselDiv = document.getElementById('carousel');
     const teamDiv = document.getElementById('team');
-    const isMobileLandscape = window.innerWidth < 576 && window.innerWidth > window.innerHeight;
 
-    if (isTeamVisible && isMobileLandscape) {
-        // Match team's height only in mobile landscape mode
+    if (teamDiv.style.display !== 'none') { // only adjust if team is visible
         const teamHeight = teamDiv.offsetHeight;
-        carouselDiv.style.height = `${teamHeight}px`;
+        carouselDiv.style.height = `${teamHeight}px`; // setting the carousel to match team height
     } else {
-        // Default to full viewport height in other cases
-        carouselDiv.style.height = '100vh';
+        carouselDiv.style.height = '100vh'; // default to full viewport height when team is hidden
     }
 }
 
@@ -157,7 +156,7 @@ document.getElementById('center').addEventListener('click', () => {
         }
 
         populateTeam();  // populate the team members in the team section
-        adjustCarouselHeight(); // adjust carousel height to match team section if mobile landscape
+        adjustCarouselHeight(); // adjust carousel height to match team section
         isTeamVisible = true; // flag if team is visible
 
     } else {
@@ -165,7 +164,7 @@ document.getElementById('center').addEventListener('click', () => {
         carouselDiv.style.display = 'flex'; // carousel visible again
         carouselDiv.style.flex = '1 1 100%'; // carousel full width flex
         teamDiv.style.display = 'none'; // hiding team section
-        carouselDiv.style.height = '100vh'; // reset carousel to full viewport height
+        carouselDiv.style.height = '100vh'; // reset carousel to full viewport height for video coverage
         showCarousel(); // showing carousel with images
         isTeamVisible = false; // flagging that team is hidden
     }
@@ -173,8 +172,28 @@ document.getElementById('center').addEventListener('click', () => {
 
 // event listener for window resize to handle showing/hiding the carousel + video
 window.addEventListener('resize', () => {
+    const carouselDiv = document.getElementById('carousel');
+    const teamDiv = document.getElementById('team');
+    const screenWidth = window.innerWidth;
+
+    // adjusting carousel and team section for screen size changes
+    if (screenWidth > 576) {
+        carouselDiv.style.display = 'flex';
+        if (isTeamVisible) {
+            carouselDiv.style.flex = '1 1 50%'; // carousel = 50% width
+            teamDiv.style.flex = '1 1 50%'; // team = 50% width
+            playVideo(); // play video on larger screens
+        } else {
+            carouselDiv.style.flex = '1 1 100%'; // full width for carousel when team = hidden
+        }
+    } else if (isTeamVisible) {
+        // hiding carousel on small screens when team is visible
+        carouselDiv.style.display = 'none';
+    }
+
+    // adjusting height if the team is visible
     if (isTeamVisible) {
-        adjustCarouselHeight(); // adjust height if the team is visible
+        adjustCarouselHeight();
     }
 });
 
